@@ -1,0 +1,81 @@
+---
+title: "Analysis Of Cars data - Assignment"
+author: "Prabeeti Bulani"
+date: "12/9/2019"
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
+mode: selfcontained
+job: Analysis Of Cars data
+subtitle: Variables and MPG
+highlighter: highlight.js
+widgets: bootstrap
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(shiny)
+```
+
+### Overview
+
+The shiny app have following features
+
+- plots graph against miles per gallon (mpg) for different variables like Displacement,Gross Horsepower,Rear axle ratio,Weigh,Number of forward gears,Number of carburetors, number of cylinders from the mtcars dataset.
+
+- Displays relationship between various car features with respect to miles per gallon (MPG)
+
+- Motor Trend Car Road Tests Datasets was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973-74 models).
+
+- Source is Henderson and Velleman (1981), Building multiple regression models interactively. Biometrics, 37, 391-411.
+
+---
+
+### Shiny App and reproducible pitch
+
+- Shiny Application - This is a task for the data science coursera course about developing data products for week 4. As part of this, I have created a shiny app and deployed it on the shiny server. The link is https://prabeeti.shinyapps.io/DevelopingDataProducts_Week4Project/.
+
+- Reproducible Pitch - There are 5 slides (inclusive of the title slide) to pitch shiny app. I have created  a web page using  Rstudio Presenter with an html5 slide deck. http://rpubs.com/prabeeti/558006
+
+- URL: *https://github.com/prabeeti/Developing-Data-Products*- All the data that have been use for this presentation and also for the creation of  Shiny application and deploy it on Rstudio's servers.
+
+---
+
+### mtcars Dataset - A data frame with 32 observations on 11 variables.
+
+| Index | Field | Detail |
+------- | ----- | ------ |
+| [, 1] | mpg | Miles/(US) gallon |
+| [, 2]  | cyl | Number of cylinders |
+| [, 3]	| disp | Displacement (cu.in.) |
+| [, 4]	| hp | Gross horsepower |
+| [, 5]	| drat | Rear axle ratio |
+| [, 6]	| wt | Weight (lb/1000) |
+| [, 7]	| qsec | 1/4 mile time |
+| [, 8]	| vs | V/S |
+| [, 9]	| am | Transmission (0 = automatic, 1 = manual) |
+| [,10]	| gear | Number of forward gears |
+| [,11]	| carb | Number of carburetors |
+```{r}
+head(mtcars,3)
+```
+---
+
+### Analysis - Main Code
+```r
+  formulaTextPoint <- reactive({
+    paste("mpg ~", "as.integer(", input$variable, ")")  })
+  
+  fit <- reactive({
+    lm(as.formula(formulaTextPoint()), data=mtcars)  })
+  ...
+  output$fit <- renderPrint({
+    summary(fit()) })
+  
+  output$mpgPlot <- renderPlot({
+    with(mtcars, {
+      plot(as.formula(formulaTextPoint()))
+      abline(fit(), col=2)
+    })  })
+```
+
