@@ -23,11 +23,6 @@ shinyServer(function(input, output) {
         formulaText()
     })
     
-    output$mpgBoxPlot <- renderPlot({
-        boxplot(as.formula(formulaText()), 
-                data = mtCarData,
-                outline = input$outliers)
-    })
     
     output$fit <- renderPrint({
         summary(fit())
