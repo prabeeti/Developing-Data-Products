@@ -9,6 +9,6 @@ Source code for ui.R and server.R files are available on the GitHub.
 
 The app developed for the first part of the assignment is avalilable at: https://prabeeti.shinyapps.io/DevelopingDataProducts_Week4Project/
 
-The presentation is available at: http://rpubs.com/prabeeti/557989
+The presentation is available at: http://rpubs.com/prabeeti/558006
 
 Files for the presentation are avalilable on the GitHub: https://github.com/prabeeti/Developing-Data-Products
